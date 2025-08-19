@@ -1,0 +1,69 @@
+﻿@model IEnumerable<IGrouping<DateTime, MiBarberiaApp.Models.Turno>>
+
+@{
+    ViewData["Title"] = "Administración de Turnos";
+}
+
+<div class="container mt-4">
+    <h1 class="text-center mb-4">@ViewData["Title"]</h1>
+
+    <div class="card shadow">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">Listado de Turnos</h4>
+        </div>
+
+        <div class="card-body">
+            @foreach (var grupo in Model)
+            {
+                <div class="mb-4">
+                    <h5 class="text-primary border-bottom pb-2">
+                        @grupo.Key.ToString("dddd, dd MMMM yyyy", new System.Globalization.CultureInfo("es-ES"))
+                    </h5>
+
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Hora</th>
+                                    <th>Cliente</th>
+                                    <th>Servicio</th>
+                                    <th>Barbero</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var turno in grupo.OrderBy(t => t.HoraInicio))
+                                {
+                                    <tr>
+                                        <td>@turno.HoraInicio.ToString(@"hh\:mm") - @turno.HoraFin.ToString(@"hh\:mm")</td>
+                                        <td>@turno.Cliente?.Nombre</td>
+                                        <td>@turno.Servicio?.Nombre</td>
+                                        <td>@turno.Barbero?.Nombre</td>
+                                        <td>
+                                            <span class="badge @(turno.Estado == "Confirmado" ? "bg-primary" :
+                                                           turno.Estado == "Completado" ? "bg-success" :
+                                                           turno.Estado == "Cancelado" ? "bg-secondary" : "bg-warning")">
+                                                @turno.Estado
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <form asp-action="CambiarEstado" method="post" class="d-inline">
+                                                <input type="hidden" name="id" value="@turno.Id" />
+                                                <select name="estado" class="form-select form-select-sm" onchange="this.form.submit()">
+                                                    <option value="Confirmado" selected="@(turno.Estado == "Confirmado")">Confirmado</option>
+                                                    <option value="Completado" selected="@(turno.Estado == "Completado")">Completado</option>
+                                                    <option value="Cancelado" selected="@(turno.Estado == "Cancelado")">Cancelado</option>
+                                                </select>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

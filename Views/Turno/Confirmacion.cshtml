@@ -1,0 +1,40 @@
+﻿@model MiBarberiaApp.Models.Turno
+
+@{
+    ViewData["Title"] = "Reserva Confirmada";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 text-center">
+            <div class="card shadow-lg">
+                <div class="card-header bg-success text-white">
+                    <h2><i class="bi bi-check-circle-fill"></i> ¡Reserva Confirmada!</h2>
+                </div>
+                <div class="card-body">
+                    <h4 class="card-title mb-4">Detalles de tu reserva</h4>
+
+                    <div class="row text-start mb-4">
+                        <div class="col-md-6">
+                            <p><strong>Fecha:</strong> @Model.Fecha.ToLongDateString()</p>
+                            <p><strong>Hora:</strong> @Model.HoraInicio.ToString(@"hh\:mm") - @Model.HoraFin.ToString(@"hh\:mm")</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p><strong>Barbero:</strong> @Model.Barbero?.Nombre</p>
+                            <p><strong>Servicio:</strong> @Model.Servicio?.Nombre</p>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-info">
+                        <h5><i class="bi bi-info-circle-fill"></i> Importante</h5>
+                        <p>Por favor llegue 10 minutos antes de su turno. Cancelaciones con al menos 24 horas de anticipación.</p>
+                    </div>
+
+                    <a asp-controller="Home" asp-action="Index" class="btn btn-primary mt-3">
+                        <i class="bi bi-house-door"></i> Volver al Inicio
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

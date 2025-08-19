@@ -1,0 +1,13 @@
+bin/
+obj/
+.vs/
+*.user
+*.suo
+Debug/
+Release/
+packages/
+*.mdf
+*.ldf
+appsettings.json
+App_Data/
+*.env
