@@ -1,7 +1,7 @@
 # Mi Barbería 💈
 
 [![ASP.NET Core](https://img.shields.io/badge/ASP.NET_Core-6.0-purple.svg)](https://dotnet.microsoft.com/)
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
 
 Una aplicación web moderna para la gestión de reservas de una barbería, construida con ASP.NET Core MVC. Incluye un panel público para clientes y un panel de administración completo para gestionar servicios, barberos y citas.
 
